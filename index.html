@@ -3,15 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ONERYA DREAMS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #090014;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main {
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      letter-spacing: 3px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #c9b8e8;
+      margin-bottom: 35px;
+    }
+
+    button {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 15px 28px;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #9333ea;
+    }
+
+    #dreamBox {
+      display: none;
+      margin-top: 30px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #5b3b88;
+      background: #160827;
+      color: white;
+      font-size: 17px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea::placeholder {
+      color: #9d8db5;
+    }
+
+    #generateButton {
+      margin-top: 18px;
+    }
+
+    #message {
+      margin-top: 20px;
+      color: #c9b8e8;
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <main>
-    <h1>ONERYA DREAMS</h1>
-    <p>Transforme ton rêve en expérience cinématographique.</p>
 
-    <button>Créer mon rêve</button>
+  <main>
+
+    <h1>ONERYA DREAMS</h1>
+
+    <p class="subtitle">
+      Transforme ton rêve en expérience cinématographique.
+    </p>
+
+    <button id="createButton">
+      Créer mon rêve
+    </button>
+
+    <section id="dreamBox">
+
+      <textarea
+        id="dreamInput"
+        placeholder="Décris ton rêve ici...
+
+Exemple : Je me retrouve dans une ville futuriste où le ciel est rempli d'étoiles..."
+      ></textarea>
+
+      <br>
+
+      <button id="generateButton">
+        Générer mon histoire
+      </button>
+
+      <p id="message">
+        ✨ Analyse de ton rêve...
+      </p>
+
+    </section>
+
   </main>
+
+  <script>
+    const createButton = document.getElementById("createButton");
+    const dreamBox = document.getElementById("dreamBox");
+    const generateButton = document.getElementById("generateButton");
+    const dreamInput = document.getElementById("dreamInput");
+    const message = document.getElementById("message");
+
+    createButton.addEventListener("click", function() {
+      dreamBox.style.display = "block";
+      createButton.style.display = "none";
+      dreamInput.focus();
+    });
+
+    generateButton.addEventListener("click", function() {
+
+      if (dreamInput.value.trim() === "") {
+        alert("Décris d'abord ton rêve.");
+        return;
+      }
+
+      message.style.display = "block";
+      message.textContent =
+        "✨ Ton rêve est prêt à être transformé en histoire...";
+    });
+  </script>
+
 </body>
 </html>
