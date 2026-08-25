@@ -5,17 +5,61 @@ export default function handler(req, res) {
     });
   }
 
-  const { dream } = req.body || {};
+  const { dream, action } = req.body || {};
 
   if (!dream || !dream.trim()) {
     return res.status(400).json({
-      error: "Décris ton rêve avant de continuer."
+      error: "Le rêve est requis."
     });
   }
 
   const text = dream.trim();
 
-  const result = `
+  // MODE : préparation de la scène 1
+  if (action === "prepare-scene-1") {
+
+    const prompt = `
+ONERYA DREAMS — SCÈNE 1
+
+Titre : L'éveil
+
+Rêve original :
+${text}
+
+Créer une scène d'ouverture cinématographique inspirée
+du rêve.
+
+Le personnage principal découvre pour la première fois
+le monde de son rêve.
+
+Caméra :
+Mouvement lent vers l'avant, plan large puis
+rapprochement progressif.
+
+Lumière :
+Atmosphère douce, lumineuse et rêveuse.
+
+Ambiance :
+Mystère, émerveillement et découverte.
+
+Style :
+Cinématographique, immersif, détaillé et cohérent.
+
+Aucun texte à l'écran.
+Aucun logo.
+`;
+
+    return res.status(200).json({
+      success: true,
+      type: "video-scene",
+      scene: 1,
+      status: "ready",
+      prompt: prompt.trim()
+    });
+  }
+
+  // MODE : génération de l'histoire
+  const story = `
 🎬 ONERYA DREAMS
 
 TITRE
@@ -28,106 +72,66 @@ ${text}
 🎥 SCÈNE 1 — L'ÉVEIL
 ━━━━━━━━━━━━━━━━━━
 
-DÉCOR :
-Créer un environnement directement inspiré du rêve.
+Le personnage découvre progressivement le monde
+de son rêve.
 
-ACTION :
-Le personnage principal découvre progressivement le monde.
+Caméra : travelling cinématographique lent.
 
-CAMÉRA :
-Plan cinématographique lent, travelling avant.
+Lumière : douce et mystérieuse.
 
-LUMIÈRE :
-Lumière douce et mystérieuse.
-
-AMBIANCE :
-Émerveillement, découverte et mystère.
+Ambiance : émerveillement et découverte.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 2 — LA DÉCOUVERTE
 ━━━━━━━━━━━━━━━━━━
 
-DÉCOR :
-Le monde devient plus vaste et spectaculaire.
+Le personnage explore son environnement et découvre
+un nouvel élément mystérieux.
 
-ACTION :
-Le personnage explore son environnement.
+Caméra : plan large puis mouvement fluide.
 
-CAMÉRA :
-Plan large suivi d'un mouvement de caméra fluide.
-
-LUMIÈRE :
-Éclairage cinématographique adapté à l'univers du rêve.
-
-AMBIANCE :
-Curiosité et aventure.
+Ambiance : curiosité et aventure.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 3 — LE VOYAGE
 ━━━━━━━━━━━━━━━━━━
 
-DÉCOR :
-Un nouvel endroit apparaît.
+Le personnage poursuit son aventure et découvre
+un nouvel endroit.
 
-ACTION :
-Le personnage poursuit son voyage et découvre quelque chose d'inattendu.
+Caméra : travelling puis plan rapproché.
 
-CAMÉRA :
-Travelling latéral puis plan rapproché.
-
-AMBIANCE :
-Mystère et tension légère.
+Ambiance : mystère.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 4 — LE MOMENT CLÉ
 ━━━━━━━━━━━━━━━━━━
 
-DÉCOR :
-Le lieu devient spectaculaire.
+Un événement spectaculaire transforme le rêve.
 
-ACTION :
-Un événement important transforme complètement le rêve.
+Caméra : plan large cinématographique.
 
-CAMÉRA :
-Plan large cinématographique puis mouvement dynamique.
-
-LUMIÈRE :
-Lumière dramatique et volumétrique.
-
-AMBIANCE :
-Émerveillement et émotion.
+Ambiance : émotion et émerveillement.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 5 — LE RÉVEIL
 ━━━━━━━━━━━━━━━━━━
 
-DÉCOR :
-Le monde devient progressivement calme.
+Le rêve se termine progressivement.
 
-ACTION :
-Le rêve se termine doucement.
+Caméra : zoom arrière lent.
 
-CAMÉRA :
-Zoom arrière lent.
-
-LUMIÈRE :
-Lumière douce.
-
-AMBIANCE :
-Calme, émotion et mystère.
+Ambiance : calme et émotion.
 
 ━━━━━━━━━━━━━━━━━━
 
-🎞️ FORMAT DU FILM
+🎞️ FILM ONERYA DREAMS
 
-5 scènes
-Durée prévue : environ 20 à 30 secondes
-Style : cinématographique
-Transitions : fluides
+5 scènes prêtes pour la production vidéo.
 `;
 
   return res.status(200).json({
     success: true,
-    story: result.trim()
+    story: story.trim()
   });
 }
