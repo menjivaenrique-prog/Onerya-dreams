@@ -13,44 +13,89 @@ export default function handler(req, res) {
     });
   }
 
-  const cleanDream = dream.trim();
+  const text = dream.trim();
 
   const story = `
-ONERYA DREAMS — TON HISTOIRE
+🎬 ONERYA DREAMS
 
-Ton rêve commence...
+━━━━━━━━━━━━━━━━━━
+TITRE
+━━━━━━━━━━━━━━━━━━
 
-Tout commence avec cette vision :
+Le monde derrière le rêve
 
-"${cleanDream}"
+━━━━━━━━━━━━━━━━━━
+PERSONNAGE PRINCIPAL
+━━━━━━━━━━━━━━━━━━
 
-Le monde autour de toi devient progressivement différent.
-Les détails de ton rêve prennent vie et une atmosphère cinématographique se crée.
+Le rêveur, plongé directement au cœur de son propre univers.
 
-SCÈNE 1 — LE COMMENCEMENT
+━━━━━━━━━━━━━━━━━━
+AMBIANCE
+━━━━━━━━━━━━━━━━━━
 
-Tu te retrouves au cœur de cet univers.
-Chaque élément de ton rêve semble avoir une signification.
-L'environnement devient plus vivant et mystérieux.
+Une atmosphère mystérieuse, immersive et cinématographique,
+adaptée aux éléments décrits dans le rêve.
 
-SCÈNE 2 — LE VOYAGE
+━━━━━━━━━━━━━━━━━━
+SYNOPSIS
+━━━━━━━━━━━━━━━━━━
 
-Tu avances dans ce monde et découvres de nouveaux éléments.
-L'histoire évolue autour de ton rêve et une aventure commence.
+Le rêve commence avec cette vision :
 
-SCÈNE 3 — LE MOMENT CLÉ
+"${text}"
 
-Un événement important change la direction de l'histoire.
-Tout ce que tu as vu jusqu'ici semble conduire vers cet instant.
+Peu à peu, cette vision devient un véritable monde.
+Les lieux, les personnages et les événements prennent vie
+autour du rêveur.
 
-SCÈNE 4 — LA FIN
+━━━━━━━━━━━━━━━━━━
+🎥 SCÈNE 1 — L'ÉVEIL
+━━━━━━━━━━━━━━━━━━
 
-Le rêve atteint son point culminant.
-Puis l'environnement devient progressivement calme.
+Le rêveur découvre son environnement.
+Les premiers détails du rêve apparaissent progressivement.
 
-Tu te réveilles avec l'impression d'avoir vécu une véritable expérience cinématographique.
+━━━━━━━━━━━━━━━━━━
+🎥 SCÈNE 2 — LA DÉCOUVERTE
+━━━━━━━━━━━━━━━━━━
 
-— FIN —
+Un nouvel élément attire son attention.
+Le monde semble plus vaste et plus mystérieux qu'il ne le pensait.
+
+━━━━━━━━━━━━━━━━━━
+🎥 SCÈNE 3 — LE VOYAGE
+━━━━━━━━━━━━━━━━━━
+
+Le rêveur avance dans cet univers.
+Les événements deviennent de plus en plus importants.
+
+━━━━━━━━━━━━━━━━━━
+🎥 SCÈNE 4 — LE MOMENT CLÉ
+━━━━━━━━━━━━━━━━━━
+
+Un événement majeur transforme complètement l'expérience.
+Le rêve atteint son intensité maximale.
+
+━━━━━━━━━━━━━━━━━━
+🎥 SCÈNE 5 — LE RÉVEIL
+━━━━━━━━━━━━━━━━━━
+
+Le monde devient progressivement silencieux.
+Le rêveur se réveille avec le souvenir d'avoir vécu
+une véritable aventure cinématographique.
+
+━━━━━━━━━━━━━━━━━━
+🎙️ NARRATION
+━━━━━━━━━━━━━━━━━━
+
+"Tout a commencé par un rêve.
+Mais cette fois, le rêve semblait avoir décidé
+de devenir réel."
+
+━━━━━━━━━━━━━━━━━━
+FIN
+━━━━━━━━━━━━━━━━━━
 `;
 
   return res.status(200).json({
