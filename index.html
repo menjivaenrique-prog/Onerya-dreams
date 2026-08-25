@@ -1,184 +1,38 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<section id="videoGallery">
 
-  <title>ONERYA DREAMS</title>
+  <h2>🎞️ Ton film</h2>
 
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #090014;
-      color: white;
-    }
+  <div class="videoCard">
+    <h3>Scène 1 — L'éveil</h3>
+    <video controls></video>
+    <p>🎬 Vidéo en attente</p>
+  </div>
 
-    main {
-      width: 90%;
-      max-width: 850px;
-      margin: auto;
-      padding: 45px 20px;
-      text-align: center;
-    }
+  <div class="videoCard">
+    <h3>Scène 2 — La découverte</h3>
+    <video controls></video>
+    <p>🎬 Vidéo en attente</p>
+  </div>
 
-    h1 {
-      font-size: 42px;
-      letter-spacing: 3px;
-    }
+  <div class="videoCard">
+    <h3>Scène 3 — Le voyage</h3>
+    <video controls></video>
+    <p>🎬 Vidéo en attente</p>
+  </div>
 
-    .subtitle {
-      color: #c9b8e8;
-      font-size: 19px;
-      margin-bottom: 35px;
-    }
+  <div class="videoCard">
+    <h3>Scène 4 — Le moment clé</h3>
+    <video controls></video>
+    <p>🎬 Vidéo en attente</p>
+  </div>
 
-    button {
-      background: #7c3aed;
-      color: white;
-      border: 0;
-      padding: 15px 28px;
-      border-radius: 12px;
-      font-size: 18px;
-      cursor: pointer;
-      margin: 8px;
-    }
+  <div class="videoCard">
+    <h3>Scène 5 — Le réveil</h3>
+    <video controls></video>
+    <p>🎬 Vidéo en attente</p>
+  </div>
 
-    button:hover {
-      background: #9333ea;
-    }
-
-    #dreamBox {
-      display: none;
-      margin-top: 30px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 180px;
-      padding: 18px;
-      border-radius: 14px;
-      border: 1px solid #5b3b88;
-      background: #160827;
-      color: white;
-      font-size: 17px;
-    }
-
-    #story {
-      display: none;
-      margin-top: 30px;
-      padding: 25px;
-      background: #160827;
-      border-radius: 14px;
-      text-align: left;
-      white-space: pre-wrap;
-      line-height: 1.7;
-    }
-
-    #videoButton {
-      display: none;
-      margin-top: 25px;
-      background: #9333ea;
-    }
-
-    #production {
-      display: none;
-      margin-top: 30px;
-      text-align: left;
-    }
-
-    .scene {
-      background: #160827;
-      border: 1px solid #3b2457;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
-
-    .scene h3 {
-      margin-top: 0;
-    }
-
-    .status {
-      color: #c9b8e8;
-      margin-top: 8px;
-    }
-
-    #finalMessage {
-      display: none;
-      margin-top: 25px;
-      padding: 20px;
-      background: #160827;
-      border-radius: 14px;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-
-<main>
-
-  <h1>ONERYA DREAMS</h1>
-
-  <p class="subtitle">
-    Transforme ton rêve en expérience cinématographique.
-  </p>
-
-  <button id="createButton">
-    Créer mon rêve
-  </button>
-
-  <section id="dreamBox">
-
-    <textarea
-      id="dreamInput"
-      placeholder="Décris ton rêve ici..."
-    ></textarea>
-
-    <br>
-
-    <button id="generateButton">
-      Générer mon histoire
-    </button>
-
-    <div id="story"></div>
-
-    <button id="videoButton">
-      🎥 Générer les vidéos
-    </button>
-
-    <section id="production">
-
-      <h2>🎬 Production du film</h2>
-
-      <div class="scene">
-        <h3>Scène 1 — L'éveil</h3>
-        <div class="status" id="status1">⏳ En attente</div>
-      </div>
-
-      <div class="scene">
-        <h3>Scène 2 — La découverte</h3>
-        <div class="status" id="status2">⏳ En attente</div>
-      </div>
-
-      <div class="scene">
-        <h3>Scène 3 — Le voyage</h3>
-        <div class="status" id="status3">⏳ En attente</div>
-      </div>
-
-      <div class="scene">
-        <h3>Scène 4 — Le moment clé</h3>
-        <div class="status" id="status4">⏳ En attente</div>
-      </div>
-
-      <div class="scene">
-        <h3>Scène 5 — Le réveil</h3>
-        <div class="status" id="status5">⏳ En attente</div>
-      </div>
-
-    </section>
+</section>>
 
     <div id="finalMessage">
       🎞️ <strong>Film ONERYA DREAMS</strong>
