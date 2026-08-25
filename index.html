@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>ONERYA DREAMS</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -30,29 +25,24 @@
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
+      font-size: 42px;
       letter-spacing: 3px;
     }
 
     .subtitle {
-      font-size: 20px;
       color: #c9b8e8;
+      font-size: 20px;
       margin-bottom: 35px;
     }
 
     button {
       background: #7c3aed;
       color: white;
-      border: none;
+      border: 0;
       padding: 15px 28px;
       border-radius: 12px;
       font-size: 18px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background: #9333ea;
     }
 
     #dreamBox {
@@ -69,93 +59,90 @@
       background: #160827;
       color: white;
       font-size: 17px;
-      resize: vertical;
-      outline: none;
-    }
-
-    textarea::placeholder {
-      color: #9d8db5;
     }
 
     #generateButton {
       margin-top: 18px;
     }
 
-    #message {
-      margin-top: 20px;
-      color: #c9b8e8;
+    #story {
       display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: #160827;
+      border-radius: 14px;
+      text-align: left;
+      white-space: pre-wrap;
+      line-height: 1.6;
     }
   </style>
 </head>
 
 <body>
 
-  <main>
+<main>
 
-    <h1>ONERYA DREAMS</h1>
+  <h1>ONERYA DREAMS</h1>
 
-    <p class="subtitle">
-      Transforme ton rêve en expérience cinématographique.
-    </p>
+  <p class="subtitle">
+    Transforme ton rêve en expérience cinématographique.
+  </p>
 
-    <button id="createButton">
-      Créer mon rêve
+  <button id="createButton">
+    Créer mon rêve
+  </button>
+
+  <section id="dreamBox">
+
+    <textarea
+      id="dreamInput"
+      placeholder="Décris ton rêve ici..."
+    ></textarea>
+
+    <br>
+
+    <button id="generateButton">
+      Générer mon histoire
     </button>
 
-    <section id="dreamBox">
+    <div id="story"></div>
 
-      <textarea
-        id="dreamInput"
-        placeholder="Décris ton rêve ici...
+  </section>
 
-Exemple : Je me retrouve dans une ville futuriste où le ciel est rempli d'étoiles..."
-      ></textarea>
+</main>
 
-      <br>
+<script>
 
-      <button id="generateButton">
-        Générer mon histoire
-      </button>
+  const createButton = document.getElementById("createButton");
+  const dreamBox = document.getElementById("dreamBox");
+  const generateButton = document.getElementById("generateButton");
+  const dreamInput = document.getElementById("dreamInput");
+  const story = document.getElementById("story");
 
-      <p id="message">
-        ✨ Analyse de ton rêve...
-      </p>
+  createButton.onclick = function() {
 
-    </section>
+    dreamBox.style.display = "block";
+    createButton.style.display = "none";
 
-  </main>
+    dreamInput.focus();
 
-  <script>
-    const createButton = document.getElementById("createButton");
-    const dreamBox = document.getElementById("dreamBox");
-    const generateButton = document.getElementById("generateButton");
-    const dreamInput = document.getElementById("dreamInput");
-    const message = document.getElementById("message");
+  };
 
-    createButton.addEventListener("click", function() {
-      dreamBox.style.display = "block";
-      createButton.style.display = "none";
-      dreamInput.focus();
-    });
+  generateButton.onclick = async function() {
 
-    generateButton.addEventListener("click", async function() {
+    const dream = dreamInput.value.trim();
 
-  const dream = dreamInput.value.trim();
+    if (!dream) {
+      alert("Décris ton rêve avant de continuer.");
+      return;
+    }
 
-  if (!dream) {
-    alert("Décris d'abord ton rêve.");
-    return;
-  }
+    story.style.display = "block";
+    story.textContent = "✨ ONERYA DREAMS crée ton histoire...";
 
-  message.style.display = "block";
-  message.textContent = "✨ ONERYA DREAMS imagine ton histoire...";
+    try {
 
-  try {
-
-    const response = await fetch(
-      "https://onerya-dreams.vercel.app/api/generate-story",
-      {
+      const response = await fetch("/api/generate-story", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -163,22 +150,28 @@ Exemple : Je me retrouve dans une ville futuriste où le ciel est rempli d'étoi
         body: JSON.stringify({
           dream: dream
         })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erreur");
       }
-    );
 
-    const data = await response.json();
+      story.textContent = data.story;
 
-    if (!response.ok) {
-      throw new Error(data.error || "Une erreur est survenue.");
+    } catch (error) {
+
+      story.textContent =
+        "Le générateur est momentanément indisponible.";
+
+      console.error(error);
+
     }
 
-    message.textContent = data.story;
+  };
 
-  } catch (error) {
+</script>
 
-    message.textContent =
-      "Impossible de générer l'histoire pour le moment.";
-
-    console.error(error);
-  }
-});
+</body>
+</html>
