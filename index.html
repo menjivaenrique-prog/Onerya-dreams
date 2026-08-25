@@ -12,16 +12,14 @@
       font-family: Arial, sans-serif;
       background: #090014;
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     main {
       width: 90%;
-      max-width: 700px;
+      max-width: 800px;
+      margin: auto;
       text-align: center;
-      padding: 40px 20px;
+      padding: 50px 20px;
     }
 
     h1 {
@@ -43,6 +41,11 @@
       border-radius: 12px;
       font-size: 18px;
       cursor: pointer;
+      margin: 8px;
+    }
+
+    button:hover {
+      background: #9333ea;
     }
 
     #dreamBox {
@@ -61,19 +64,27 @@
       font-size: 17px;
     }
 
-    #generateButton {
-      margin-top: 18px;
-    }
-
     #story {
       display: none;
       margin-top: 30px;
-      padding: 20px;
+      padding: 25px;
       background: #160827;
       border-radius: 14px;
       text-align: left;
       white-space: pre-wrap;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    #videoButton {
+      display: none;
+      margin-top: 25px;
+      background: #9333ea;
+    }
+
+    #videoStatus {
+      display: none;
+      margin-top: 20px;
+      color: #c9b8e8;
     }
   </style>
 </head>
@@ -107,69 +118,99 @@
 
     <div id="story"></div>
 
+    <button id="videoButton">
+      🎥 Générer les vidéos
+    </button>
+
+    <p id="videoStatus"></p>
+
   </section>
 
 </main>
 
 <script>
 
-  const createButton = document.getElementById("createButton");
-  const dreamBox = document.getElementById("dreamBox");
-  const generateButton = document.getElementById("generateButton");
-  const dreamInput = document.getElementById("dreamInput");
-  const story = document.getElementById("story");
+const createButton = document.getElementById("createButton");
+const dreamBox = document.getElementById("dreamBox");
+const generateButton = document.getElementById("generateButton");
+const dreamInput = document.getElementById("dreamInput");
+const story = document.getElementById("story");
+const videoButton = document.getElementById("videoButton");
+const videoStatus = document.getElementById("videoStatus");
 
-  createButton.onclick = function() {
+createButton.onclick = function() {
 
-    dreamBox.style.display = "block";
-    createButton.style.display = "none";
+  dreamBox.style.display = "block";
+  createButton.style.display = "none";
 
-    dreamInput.focus();
+  dreamInput.focus();
 
-  };
+};
 
-  generateButton.onclick = async function() {
+generateButton.onclick = async function() {
 
-    const dream = dreamInput.value.trim();
+  const dream = dreamInput.value.trim();
 
-    if (!dream) {
-      alert("Décris ton rêve avant de continuer.");
-      return;
+  if (!dream) {
+    alert("Décris ton rêve avant de continuer.");
+    return;
+  }
+
+  story.style.display = "block";
+  videoButton.style.display = "none";
+
+  story.textContent = "✨ ONERYA DREAMS crée tes scènes...";
+
+  try {
+
+    const response = await fetch("/api/generate-story", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        dream: dream
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Erreur");
     }
 
-    story.style.display = "block";
-    story.textContent = "✨ ONERYA DREAMS crée ton histoire...";
+    story.textContent = data.story;
 
-    try {
+    videoButton.style.display = "inline-block";
 
-      const response = await fetch("/api/generate-story", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          dream: dream
-        })
-      });
+  } catch (error) {
 
-      const data = await response.json();
+    story.textContent =
+      "Impossible de générer les scènes pour le moment.";
 
-      if (!response.ok) {
-        throw new Error(data.error || "Erreur");
-      }
+    console.error(error);
 
-      story.textContent = data.story;
+  }
 
-    } catch (error) {
+};
 
-      story.textContent =
-        "Le générateur est momentanément indisponible.";
+videoButton.onclick = function() {
 
-      console.error(error);
+  videoStatus.style.display = "block";
 
-    }
+  videoStatus.textContent =
+    "🎬 Préparation des 5 scènes vidéo...";
 
-  };
+  setTimeout(function() {
+
+    videoStatus.textContent =
+      "✨ Les 5 scènes sont prêtes pour le moteur vidéo ONERYA DREAMS.";
+
+  }, 2000);
+
+};
 
 </script>
 
