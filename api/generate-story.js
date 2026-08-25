@@ -15,91 +15,119 @@ export default function handler(req, res) {
 
   const text = dream.trim();
 
-  const story = `
+  const result = `
 🎬 ONERYA DREAMS
 
-━━━━━━━━━━━━━━━━━━
 TITRE
-━━━━━━━━━━━━━━━━━━
-
 Le monde derrière le rêve
 
-━━━━━━━━━━━━━━━━━━
-PERSONNAGE PRINCIPAL
-━━━━━━━━━━━━━━━━━━
-
-Le rêveur, plongé directement au cœur de son propre univers.
-
-━━━━━━━━━━━━━━━━━━
-AMBIANCE
-━━━━━━━━━━━━━━━━━━
-
-Une atmosphère mystérieuse, immersive et cinématographique,
-adaptée aux éléments décrits dans le rêve.
-
-━━━━━━━━━━━━━━━━━━
-SYNOPSIS
-━━━━━━━━━━━━━━━━━━
-
-Le rêve commence avec cette vision :
-
-"${text}"
-
-Peu à peu, cette vision devient un véritable monde.
-Les lieux, les personnages et les événements prennent vie
-autour du rêveur.
+RÊVE ORIGINAL
+${text}
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 1 — L'ÉVEIL
 ━━━━━━━━━━━━━━━━━━
 
-Le rêveur découvre son environnement.
-Les premiers détails du rêve apparaissent progressivement.
+DÉCOR :
+Créer un environnement directement inspiré du rêve.
+
+ACTION :
+Le personnage principal découvre progressivement le monde.
+
+CAMÉRA :
+Plan cinématographique lent, travelling avant.
+
+LUMIÈRE :
+Lumière douce et mystérieuse.
+
+AMBIANCE :
+Émerveillement, découverte et mystère.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 2 — LA DÉCOUVERTE
 ━━━━━━━━━━━━━━━━━━
 
-Un nouvel élément attire son attention.
-Le monde semble plus vaste et plus mystérieux qu'il ne le pensait.
+DÉCOR :
+Le monde devient plus vaste et spectaculaire.
+
+ACTION :
+Le personnage explore son environnement.
+
+CAMÉRA :
+Plan large suivi d'un mouvement de caméra fluide.
+
+LUMIÈRE :
+Éclairage cinématographique adapté à l'univers du rêve.
+
+AMBIANCE :
+Curiosité et aventure.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 3 — LE VOYAGE
 ━━━━━━━━━━━━━━━━━━
 
-Le rêveur avance dans cet univers.
-Les événements deviennent de plus en plus importants.
+DÉCOR :
+Un nouvel endroit apparaît.
+
+ACTION :
+Le personnage poursuit son voyage et découvre quelque chose d'inattendu.
+
+CAMÉRA :
+Travelling latéral puis plan rapproché.
+
+AMBIANCE :
+Mystère et tension légère.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 4 — LE MOMENT CLÉ
 ━━━━━━━━━━━━━━━━━━
 
-Un événement majeur transforme complètement l'expérience.
-Le rêve atteint son intensité maximale.
+DÉCOR :
+Le lieu devient spectaculaire.
+
+ACTION :
+Un événement important transforme complètement le rêve.
+
+CAMÉRA :
+Plan large cinématographique puis mouvement dynamique.
+
+LUMIÈRE :
+Lumière dramatique et volumétrique.
+
+AMBIANCE :
+Émerveillement et émotion.
 
 ━━━━━━━━━━━━━━━━━━
 🎥 SCÈNE 5 — LE RÉVEIL
 ━━━━━━━━━━━━━━━━━━
 
-Le monde devient progressivement silencieux.
-Le rêveur se réveille avec le souvenir d'avoir vécu
-une véritable aventure cinématographique.
+DÉCOR :
+Le monde devient progressivement calme.
+
+ACTION :
+Le rêve se termine doucement.
+
+CAMÉRA :
+Zoom arrière lent.
+
+LUMIÈRE :
+Lumière douce.
+
+AMBIANCE :
+Calme, émotion et mystère.
 
 ━━━━━━━━━━━━━━━━━━
-🎙️ NARRATION
-━━━━━━━━━━━━━━━━━━
 
-"Tout a commencé par un rêve.
-Mais cette fois, le rêve semblait avoir décidé
-de devenir réel."
+🎞️ FORMAT DU FILM
 
-━━━━━━━━━━━━━━━━━━
-FIN
-━━━━━━━━━━━━━━━━━━
+5 scènes
+Durée prévue : environ 20 à 30 secondes
+Style : cinématographique
+Transitions : fluides
 `;
 
   return res.status(200).json({
     success: true,
-    story: story.trim()
+    story: result.trim()
   });
 }
