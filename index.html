@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ONERYA DREAMS</title>
 
   <style>
@@ -16,10 +17,10 @@
 
     main {
       width: 90%;
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
+      padding: 45px 20px;
       text-align: center;
-      padding: 50px 20px;
     }
 
     h1 {
@@ -29,7 +30,7 @@
 
     .subtitle {
       color: #c9b8e8;
-      font-size: 20px;
+      font-size: 19px;
       margin-bottom: 35px;
     }
 
@@ -81,10 +82,36 @@
       background: #9333ea;
     }
 
-    #videoStatus {
+    #production {
       display: none;
-      margin-top: 20px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .scene {
+      background: #160827;
+      border: 1px solid #3b2457;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .scene h3 {
+      margin-top: 0;
+    }
+
+    .status {
       color: #c9b8e8;
+      margin-top: 8px;
+    }
+
+    #finalMessage {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #160827;
+      border-radius: 14px;
+      text-align: center;
     }
   </style>
 </head>
@@ -122,7 +149,42 @@
       🎥 Générer les vidéos
     </button>
 
-    <p id="videoStatus"></p>
+    <section id="production">
+
+      <h2>🎬 Production du film</h2>
+
+      <div class="scene">
+        <h3>Scène 1 — L'éveil</h3>
+        <div class="status" id="status1">⏳ En attente</div>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 2 — La découverte</h3>
+        <div class="status" id="status2">⏳ En attente</div>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 3 — Le voyage</h3>
+        <div class="status" id="status3">⏳ En attente</div>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 4 — Le moment clé</h3>
+        <div class="status" id="status4">⏳ En attente</div>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 5 — Le réveil</h3>
+        <div class="status" id="status5">⏳ En attente</div>
+      </div>
+
+    </section>
+
+    <div id="finalMessage">
+      🎞️ <strong>Film ONERYA DREAMS</strong>
+      <br><br>
+      Les 5 scènes sont prêtes pour l'assemblage.
+    </div>
 
   </section>
 
@@ -136,7 +198,8 @@ const generateButton = document.getElementById("generateButton");
 const dreamInput = document.getElementById("dreamInput");
 const story = document.getElementById("story");
 const videoButton = document.getElementById("videoButton");
-const videoStatus = document.getElementById("videoStatus");
+const production = document.getElementById("production");
+const finalMessage = document.getElementById("finalMessage");
 
 createButton.onclick = function() {
 
@@ -158,12 +221,15 @@ generateButton.onclick = async function() {
 
   story.style.display = "block";
   videoButton.style.display = "none";
+  production.style.display = "none";
+  finalMessage.style.display = "none";
 
-  story.textContent = "✨ ONERYA DREAMS crée tes scènes...";
+  story.textContent = "✨ ONERYA DREAMS crée ton histoire...";
 
   try {
 
     const response = await fetch("/api/generate-story", {
+
       method: "POST",
 
       headers: {
@@ -173,6 +239,7 @@ generateButton.onclick = async function() {
       body: JSON.stringify({
         dream: dream
       })
+
     });
 
     const data = await response.json();
@@ -188,7 +255,7 @@ generateButton.onclick = async function() {
   } catch (error) {
 
     story.textContent =
-      "Impossible de générer les scènes pour le moment.";
+      "Impossible de générer l'histoire.";
 
     console.error(error);
 
@@ -198,17 +265,45 @@ generateButton.onclick = async function() {
 
 videoButton.onclick = function() {
 
-  videoStatus.style.display = "block";
+  production.style.display = "block";
+  finalMessage.style.display = "none";
 
-  videoStatus.textContent =
-    "🎬 Préparation des 5 scènes vidéo...";
+  const statuses = [
+    document.getElementById("status1"),
+    document.getElementById("status2"),
+    document.getElementById("status3"),
+    document.getElementById("status4"),
+    document.getElementById("status5")
+  ];
 
-  setTimeout(function() {
+  let current = 0;
 
-    videoStatus.textContent =
-      "✨ Les 5 scènes sont prêtes pour le moteur vidéo ONERYA DREAMS.";
+  statuses.forEach(status => {
+    status.textContent = "⏳ En attente";
+  });
 
-  }, 2000);
+  const interval = setInterval(function() {
+
+    if (current > 0) {
+      statuses[current - 1].textContent = "✅ Scène prête";
+    }
+
+    if (current < statuses.length) {
+      statuses[current].textContent =
+        "🎬 Génération de la scène...";
+    }
+
+    current++;
+
+    if (current > statuses.length) {
+
+      clearInterval(interval);
+
+      finalMessage.style.display = "block";
+
+    }
+
+  }, 1200);
 
 };
 
