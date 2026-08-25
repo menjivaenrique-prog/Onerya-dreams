@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ONERYA DREAMS</title>
 
   <style>
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -30,6 +32,7 @@
     .subtitle {
       color: #c9b8e8;
       font-size: 19px;
+      margin-bottom: 35px;
     }
 
     button {
@@ -43,12 +46,17 @@
       cursor: pointer;
     }
 
+    button:hover {
+      background: #9333ea;
+    }
+
     textarea {
       width: 100%;
       min-height: 180px;
       padding: 15px;
       box-sizing: border-box;
       border-radius: 12px;
+      border: 1px solid #5b3b88;
       background: #160827;
       color: white;
       font-size: 17px;
@@ -56,6 +64,7 @@
 
     #dreamBox,
     #story,
+    #videoButton,
     #production,
     #videoGallery,
     #finalMessage {
@@ -80,6 +89,20 @@
       text-align: left;
     }
 
+    .scene button {
+      font-size: 15px;
+      padding: 12px 18px;
+    }
+
+    .status {
+      color: #c9b8e8;
+    }
+
+    #scene1Result {
+      color: #c9b8e8;
+      line-height: 1.5;
+    }
+
     .videoCard {
       background: #160827;
       border-radius: 14px;
@@ -95,16 +118,13 @@
       border-radius: 10px;
     }
 
-    .status {
-      color: #c9b8e8;
-    }
-
     #finalMessage {
       margin-top: 25px;
       padding: 20px;
       background: #160827;
       border-radius: 14px;
     }
+
   </style>
 </head>
 
@@ -146,28 +166,59 @@
       <h2>🎬 Production du film</h2>
 
       <div class="scene">
+
         <h3>Scène 1 — L'éveil</h3>
-        <p class="status" id="status1">⏳ En attente</p>
+
+        <p class="status" id="status1">
+          ⏳ En attente
+        </p>
+
+        <button id="generateScene1">
+          🎥 Préparer la scène 1
+        </button>
+
+        <p id="scene1Result"></p>
+
       </div>
 
       <div class="scene">
+
         <h3>Scène 2 — La découverte</h3>
-        <p class="status" id="status2">⏳ En attente</p>
+
+        <p class="status">
+          ⏳ En attente
+        </p>
+
       </div>
 
       <div class="scene">
+
         <h3>Scène 3 — Le voyage</h3>
-        <p class="status" id="status3">⏳ En attente</p>
+
+        <p class="status">
+          ⏳ En attente
+        </p>
+
       </div>
 
       <div class="scene">
+
         <h3>Scène 4 — Le moment clé</h3>
-        <p class="status" id="status4">⏳ En attente</p>
+
+        <p class="status">
+          ⏳ En attente
+        </p>
+
       </div>
 
       <div class="scene">
+
         <h3>Scène 5 — Le réveil</h3>
-        <p class="status" id="status5">⏳ En attente</p>
+
+        <p class="status">
+          ⏳ En attente
+        </p>
+
       </div>
 
     </section>
@@ -209,9 +260,13 @@
     </section>
 
     <div id="finalMessage">
+
       🎞️ <strong>Film ONERYA DREAMS</strong>
+
       <br><br>
+
       Les 5 scènes sont prêtes pour l'assemblage.
+
     </div>
 
   </section>
@@ -220,98 +275,218 @@
 
 <script>
 
-const createButton = document.getElementById("createButton");
-const dreamBox = document.getElementById("dreamBox");
-const generateButton = document.getElementById("generateButton");
-const dreamInput = document.getElementById("dreamInput");
-const story = document.getElementById("story");
-const videoButton = document.getElementById("videoButton");
-const production = document.getElementById("production");
-const videoGallery = document.getElementById("videoGallery");
-const finalMessage = document.getElementById("finalMessage");
+const createButton =
+  document.getElementById("createButton");
+
+const dreamBox =
+  document.getElementById("dreamBox");
+
+const generateButton =
+  document.getElementById("generateButton");
+
+const dreamInput =
+  document.getElementById("dreamInput");
+
+const story =
+  document.getElementById("story");
+
+const videoButton =
+  document.getElementById("videoButton");
+
+const production =
+  document.getElementById("production");
+
+const videoGallery =
+  document.getElementById("videoGallery");
+
+const finalMessage =
+  document.getElementById("finalMessage");
+
+const generateScene1 =
+  document.getElementById("generateScene1");
+
+const scene1Result =
+  document.getElementById("scene1Result");
+
 
 createButton.onclick = function() {
+
   dreamBox.style.display = "block";
+
   createButton.style.display = "none";
+
   dreamInput.focus();
+
 };
+
 
 generateButton.onclick = async function() {
 
-  const dream = dreamInput.value.trim();
+  const dream =
+    dreamInput.value.trim();
 
   if (!dream) {
-    alert("Décris ton rêve avant de continuer.");
+
+    alert(
+      "Décris ton rêve avant de continuer."
+    );
+
     return;
   }
 
   story.style.display = "block";
-  story.textContent = "✨ ONERYA DREAMS crée ton histoire...";
+
+  story.textContent =
+    "✨ ONERYA DREAMS crée ton histoire...";
 
   try {
 
-    const response = await fetch("/api/generate-story", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        dream: dream
-      })
-    });
+    const response =
+      await fetch(
+        "/api/generate-story",
+        {
+          method: "POST",
 
-    const data = await response.json();
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            dream: dream
+          })
+        }
+      );
+
+    const data =
+      await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "Erreur");
+
+      throw new Error(
+        data.error || "Erreur"
+      );
+
     }
 
-    story.textContent = data.story;
-    videoButton.style.display = "inline-block";
+    story.textContent =
+      data.story;
 
-  } catch (error) {
+    videoButton.style.display =
+      "inline-block";
 
-    story.textContent = "Impossible de générer l'histoire.";
+  }
+
+  catch (error) {
+
+    story.textContent =
+      "Impossible de générer l'histoire.";
+
     console.error(error);
 
   }
+
 };
+
 
 videoButton.onclick = function() {
 
-  production.style.display = "block";
-  videoGallery.style.display = "block";
-  finalMessage.style.display = "none";
+  production.style.display =
+    "block";
 
-  const statuses = [
-    document.getElementById("status1"),
-    document.getElementById("status2"),
-    document.getElementById("status3"),
-    document.getElementById("status4"),
-    document.getElementById("status5")
-  ];
+  videoGallery.style.display =
+    "block";
 
-  let current = 0;
+  finalMessage.style.display =
+    "none";
 
-  const interval = setInterval(function() {
-
-    if (current > 0) {
-      statuses[current - 1].textContent = "✅ Scène prête";
-    }
-
-    if (current < statuses.length) {
-      statuses[current].textContent = "🎬 Génération de la scène...";
-    }
-
-    current++;
-
-    if (current > statuses.length) {
-      clearInterval(interval);
-      finalMessage.style.display = "block";
-    }
-
-  }, 1200);
 };
+
+
+generateScene1.onclick =
+  async function() {
+
+    const dream =
+      dreamInput.value.trim();
+
+    if (!dream) {
+
+      scene1Result.textContent =
+        "Décris d'abord ton rêve.";
+
+      return;
+
+    }
+
+    scene1Result.textContent =
+      "🎬 Préparation de la scène 1...";
+
+    generateScene1.disabled =
+      true;
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/generate-video",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+              dream: dream,
+
+              scene: 1
+
+            })
+
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.error ||
+          "Erreur"
+        );
+
+      }
+
+      scene1Result.textContent =
+        "✅ Scène 1 préparée pour le moteur vidéo.";
+
+      document.getElementById(
+        "status1"
+      ).textContent =
+        "✅ Prompt vidéo prêt";
+
+      console.log(
+        data.prompt
+      );
+
+    }
+
+    catch (error) {
+
+      scene1Result.textContent =
+        "❌ Impossible de préparer la scène 1.";
+
+      generateScene1.disabled =
+        false;
+
+      console.error(error);
+
+    }
+
+  };
 
 </script>
 
