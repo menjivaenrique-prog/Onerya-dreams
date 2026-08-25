@@ -1,38 +1,212 @@
-<section id="videoGallery">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONERYA DREAMS</title>
 
-  <h2>🎞️ Ton film</h2>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #090014;
+      color: white;
+    }
 
-  <div class="videoCard">
-    <h3>Scène 1 — L'éveil</h3>
-    <video controls></video>
-    <p>🎬 Vidéo en attente</p>
-  </div>
+    main {
+      width: 90%;
+      max-width: 850px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-  <div class="videoCard">
-    <h3>Scène 2 — La découverte</h3>
-    <video controls></video>
-    <p>🎬 Vidéo en attente</p>
-  </div>
+    h1 {
+      font-size: 40px;
+      letter-spacing: 3px;
+    }
 
-  <div class="videoCard">
-    <h3>Scène 3 — Le voyage</h3>
-    <video controls></video>
-    <p>🎬 Vidéo en attente</p>
-  </div>
+    .subtitle {
+      color: #c9b8e8;
+      font-size: 19px;
+    }
 
-  <div class="videoCard">
-    <h3>Scène 4 — Le moment clé</h3>
-    <video controls></video>
-    <p>🎬 Vidéo en attente</p>
-  </div>
+    button {
+      background: #7c3aed;
+      color: white;
+      border: 0;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+    }
 
-  <div class="videoCard">
-    <h3>Scène 5 — Le réveil</h3>
-    <video controls></video>
-    <p>🎬 Vidéo en attente</p>
-  </div>
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 15px;
+      box-sizing: border-box;
+      border-radius: 12px;
+      background: #160827;
+      color: white;
+      font-size: 17px;
+    }
 
-</section>>
+    #dreamBox,
+    #story,
+    #production,
+    #videoGallery,
+    #finalMessage {
+      display: none;
+    }
+
+    #story {
+      margin-top: 25px;
+      padding: 20px;
+      background: #160827;
+      border-radius: 14px;
+      text-align: left;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    .scene {
+      background: #160827;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    .videoCard {
+      background: #160827;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    video {
+      width: 100%;
+      min-height: 150px;
+      background: black;
+      border-radius: 10px;
+    }
+
+    .status {
+      color: #c9b8e8;
+    }
+
+    #finalMessage {
+      margin-top: 25px;
+      padding: 20px;
+      background: #160827;
+      border-radius: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<main>
+
+  <h1>ONERYA DREAMS</h1>
+
+  <p class="subtitle">
+    Transforme ton rêve en expérience cinématographique.
+  </p>
+
+  <button id="createButton">
+    Créer mon rêve
+  </button>
+
+  <section id="dreamBox">
+
+    <textarea
+      id="dreamInput"
+      placeholder="Décris ton rêve ici..."
+    ></textarea>
+
+    <br>
+
+    <button id="generateButton">
+      Générer mon histoire
+    </button>
+
+    <div id="story"></div>
+
+    <button id="videoButton">
+      🎥 Générer les vidéos
+    </button>
+
+    <section id="production">
+
+      <h2>🎬 Production du film</h2>
+
+      <div class="scene">
+        <h3>Scène 1 — L'éveil</h3>
+        <p class="status" id="status1">⏳ En attente</p>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 2 — La découverte</h3>
+        <p class="status" id="status2">⏳ En attente</p>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 3 — Le voyage</h3>
+        <p class="status" id="status3">⏳ En attente</p>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 4 — Le moment clé</h3>
+        <p class="status" id="status4">⏳ En attente</p>
+      </div>
+
+      <div class="scene">
+        <h3>Scène 5 — Le réveil</h3>
+        <p class="status" id="status5">⏳ En attente</p>
+      </div>
+
+    </section>
+
+    <section id="videoGallery">
+
+      <h2>🎞️ Ton film</h2>
+
+      <div class="videoCard">
+        <h3>Scène 1 — L'éveil</h3>
+        <video controls></video>
+        <p>🎬 Vidéo en attente</p>
+      </div>
+
+      <div class="videoCard">
+        <h3>Scène 2 — La découverte</h3>
+        <video controls></video>
+        <p>🎬 Vidéo en attente</p>
+      </div>
+
+      <div class="videoCard">
+        <h3>Scène 3 — Le voyage</h3>
+        <video controls></video>
+        <p>🎬 Vidéo en attente</p>
+      </div>
+
+      <div class="videoCard">
+        <h3>Scène 4 — Le moment clé</h3>
+        <video controls></video>
+        <p>🎬 Vidéo en attente</p>
+      </div>
+
+      <div class="videoCard">
+        <h3>Scène 5 — Le réveil</h3>
+        <video controls></video>
+        <p>🎬 Vidéo en attente</p>
+      </div>
+
+    </section>
 
     <div id="finalMessage">
       🎞️ <strong>Film ONERYA DREAMS</strong>
@@ -53,15 +227,13 @@ const dreamInput = document.getElementById("dreamInput");
 const story = document.getElementById("story");
 const videoButton = document.getElementById("videoButton");
 const production = document.getElementById("production");
+const videoGallery = document.getElementById("videoGallery");
 const finalMessage = document.getElementById("finalMessage");
 
 createButton.onclick = function() {
-
   dreamBox.style.display = "block";
   createButton.style.display = "none";
-
   dreamInput.focus();
-
 };
 
 generateButton.onclick = async function() {
@@ -74,26 +246,18 @@ generateButton.onclick = async function() {
   }
 
   story.style.display = "block";
-  videoButton.style.display = "none";
-  production.style.display = "none";
-  finalMessage.style.display = "none";
-
   story.textContent = "✨ ONERYA DREAMS crée ton histoire...";
 
   try {
 
     const response = await fetch("/api/generate-story", {
-
       method: "POST",
-
       headers: {
         "Content-Type": "application/json"
       },
-
       body: JSON.stringify({
         dream: dream
       })
-
     });
 
     const data = await response.json();
@@ -103,23 +267,20 @@ generateButton.onclick = async function() {
     }
 
     story.textContent = data.story;
-
     videoButton.style.display = "inline-block";
 
   } catch (error) {
 
-    story.textContent =
-      "Impossible de générer l'histoire.";
-
+    story.textContent = "Impossible de générer l'histoire.";
     console.error(error);
 
   }
-
 };
 
 videoButton.onclick = function() {
 
   production.style.display = "block";
+  videoGallery.style.display = "block";
   finalMessage.style.display = "none";
 
   const statuses = [
@@ -132,10 +293,6 @@ videoButton.onclick = function() {
 
   let current = 0;
 
-  statuses.forEach(status => {
-    status.textContent = "⏳ En attente";
-  });
-
   const interval = setInterval(function() {
 
     if (current > 0) {
@@ -143,22 +300,17 @@ videoButton.onclick = function() {
     }
 
     if (current < statuses.length) {
-      statuses[current].textContent =
-        "🎬 Génération de la scène...";
+      statuses[current].textContent = "🎬 Génération de la scène...";
     }
 
     current++;
 
     if (current > statuses.length) {
-
       clearInterval(interval);
-
       finalMessage.style.display = "block";
-
     }
 
   }, 1200);
-
 };
 
 </script>
